@@ -10,14 +10,12 @@ body {
 
 /* Navbar */
 .navbar {
-  position: fixed; /* Fix the navbar at the top */
   width: 100%; /* Make it span the full width */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
-  backdrop-filter: blur(10px); /* Adds a blur effect */
+  background-color: rgba(0, 123, 255, 0.8); /* Biru dengan transparansi 80% */
   z-index: 1000; /* Make sure it stays on top */
 }
 
@@ -29,13 +27,14 @@ body {
 
 .logo {
   width: 40px; /* Adjust logo size as needed */
-  height: 40px;
+  height: 60px;
   margin-right: 10px;
+  margin-left: 50px;
 }
 
 .navbar h1 {
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 27px;
   margin: 0;
 }
 
@@ -52,6 +51,7 @@ body {
   text-decoration: none;
   color: #fff;
   transition: color 0.3s ease;
+  font-size: 17px;
 }
 
 .navbar ul li a:hover {
@@ -145,7 +145,7 @@ body {
 
 /* Pricing Section */
 .pricing-section {
-  padding: 60px 0;
+  padding: 0; /* Menghapus padding */
   background: linear-gradient(
     to top,
     rgba(0, 85, 170, 0.8),
@@ -155,12 +155,16 @@ body {
   background-size: cover;
 }
 
+/* Memastikan container flex tidak memiliki gap */
 .container {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 0; /* Menghilangkan gap antar elemen */
+  margin: 0; /* Menghilangkan margin */
+  padding: 0; /* Menghilangkan padding */
 }
 
+/* Memastikan .pricing-card tidak memiliki margin dan padding yang tidak diinginkan */
 .pricing-card {
   background: rgb(255, 255, 255);
   border-radius: 10px;
@@ -170,9 +174,10 @@ body {
   text-align: center;
   position: relative;
   transition: transform 0.3s ease;
-  margin: 10px;
+  margin: 20px; /* Menambahkan margin untuk memberikan gap antar pricing card */
 }
 
+/* Efek hover pada .pricing-card */
 .pricing-card:hover {
   transform: translateY(-10px);
 }
@@ -180,7 +185,7 @@ body {
 .badge {
   background-color: #3d5afe;
   color: #fff;
-  padding: 5px 10px;
+  padding: 10px 30px;
   font-weight: bold;
   border-radius: 20px;
   position: absolute;
@@ -292,19 +297,29 @@ body {
 
 /* Technology Section */
 .tech-section {
-  padding: 40px 20px;
   text-align: center;
+  padding: 40px;
 }
 
 .tech-container {
   display: flex;
-  gap: 40px;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .tech-container img {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.tech-container img:hover {
+  transform: scale(1.3); /* Membesarkan gambar saat hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Memberikan bayangan pada gambar */
+  opacity: 0.8; /* Menurunkan opacity saat hover */
 }
 
 /*footer */
@@ -475,4 +490,191 @@ footer {
   border-radius: 5px;
   text-align: center;
   font-size: 1em;
+}
+
+.wa {
+  margin-top: 100px;
+  margin-left: 20px;
+  width: 60px;
+  height: 60px;
+}
+.p-wa {
+  font-size: 20px;
+  margin-top: 120px;
+  margin-left: 10px;
+  color: #ffffff;
+  border: 2px solid #2bff00; /* Add border */
+  background-color: #26a70c;
+  border-radius: 15px; /* Rounded corners */
+  padding: 10px; /* Add padding for better spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+a {
+  text-decoration: none; /* Remove underline from links */
+}
+
+.product {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+
+.product h2 {
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 600;
+}
+.product-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Agar card bisa turun ke baris baru jika tidak muat */
+  justify-content: space-between;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Menjaga gambar agar memenuhi card secara proporsional */
+  display: block;
+}
+
+/* Styling untuk judul produk */
+.product-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin: 20px;
+}
+
+/* Styling untuk deskripsi produk */
+.product-card p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0 20px 20px; /* Margin untuk deskripsi */
+}
+.payment-instructions {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 800px; /* Menambahkan margin-top untuk memberi jarak dari navbar */
+}
+@media (max-width: 1024px) {
+  .navbar ul {
+    gap: 20px;
+    margin-right: 40px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 20px;
+  }
+
+  .content .text h2 {
+    font-size: 1.5rem;
+  }
+
+  .content .text p {
+    font-size: 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pricing-card {
+    width: 45%;
+  }
+
+  .service {
+    width: 45%;
+  }
+
+  .service-section {
+    padding: 40px 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .navbar ul {
+    display: none;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  .p-wa {
+    display: none;
+  }
+
+  .wa {
+    display: none;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content .text h2 {
+    font-size: 1.3rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pricing-card {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+
+  .service {
+    padding: 20px;
+    width: 50%;
+    margin-bottom: 30px;
+  }
 }

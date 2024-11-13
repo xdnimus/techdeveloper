@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
     $additional_info = $_POST['additionalInfo'];
 
-    // Database connection
+    // Koneksi database
     $servername = "localhost";
-    $username = "root"; // Username DB Anda
-    $dbpassword = "";   // Password DB Anda
+    $username = "root";
+    $dbpassword = "";
     $dbname = "techdeveloper";
 
     // Buat koneksi
@@ -34,22 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Eksekusi query
     if ($stmt->execute()) {
-        $_SESSION['order_message'] = "Order berhasil dikirim!";
+        // Pesan pembayaran dengan beberapa pilihan bank
+        $_SESSION['order_message'] = "Order berhasil dikirim! Silakan lakukan pembayaran ke salah satu rekening berikut:";
+
         // Tutup koneksi
         $stmt->close();
         $conn->close();
-        header("Location: index.php"); // Redirect ke halaman konfirmasi
+        header("Location: payment.php"); // Redirect ke halaman pembayaran
         exit();
     } else {
         $_SESSION['order_message'] = "Error: " . $stmt->error;
-        // Tutup koneksi
         $stmt->close();
         $conn->close();
         header("Location: index.php"); // Redirect ke halaman formulir jika gagal
         exit();
     }
-    
-    
 }
 ?>
-

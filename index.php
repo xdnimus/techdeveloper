@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Set pesan sukses di session
     $_SESSION['order_message'] = 'Pesanan Anda telah berhasil diterima!';
+
+    
     
     // Redirect untuk menampilkan pesan sukses
     header("Location: ".$_SERVER['PHP_SELF']);
@@ -50,18 +52,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Navbar -->
     <div class="navbar">
         <div class="navbar-left">
-            <img src="logo2.jpg" alt="Logo" class="logo"> <!-- Add logo image here -->
             <h1>TechDeveloper</h1>
         </div>
         <ul class="navbar-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#service">Service</a></li>
+            <li><a href="#product">Product</a></li>
         </ul>
     </div>
+    <?php if (!empty($_SESSION['order_message'])): ?>
+        <div class="confirmation-message"><?= $_SESSION['order_message'] ?></div>
+        <?php unset($_SESSION['order_message']); ?>
+    <?php endif; ?>
+
+    <!-- Tombol Lanjutkan Pembayaran hanya muncul jika sudah order -->
+    <?php if (isset($_SESSION['has_ordered']) && $_SESSION['has_ordered']): ?>
+        <a href="payment.php" class="button-payment">Lanjutkan Pembayaran</a>
+    <?php endif; ?>
 </body>
 </html>
-  
+
     <div id="home" class="container">
         <div class="content">
             <div class="text">
@@ -69,12 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h2>Kami wujudkan ide Anda dengan cepat, tepat, dan berkualitas</h2>
                 <p2>Penyedia layanan pembuatan aplikasi digital yang terpercaya</p2>
             </div>
-            <!-- <div class="buttons">
-                <a href="#login" class="login-btn">Login</a>
-                <a href="#signup" class="signup-btn">Sign up</a>
-            </div> -->
+            <a href="https://wa.me/6285664246194">
+                        <img src="whatsapp.png" class="wa">
+                    </a>
+            <a href="https://wa.me/628993401674">
+                <p class="p-wa" >Hubungi selengkapnya ... </p>
+            </a>
         </div>
-        <p class="p-footer">Version 1.0.0</p>
     </div>
 
 
@@ -92,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 
-
 <div id="registerForm" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal('registerForm')">&times;</span>
@@ -109,15 +120,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div> -->
 
-
    <!-- Pricing Section -->
 <div id="pricing" class="pricing-section">
-    <div class="container">
+<?php if (!empty($message)) : ?>
+    <div class="confirmation-message">
+        <?= $message ?>
+        <a href="payment.php" class="payment-button">Lanjut ke Pembayaran</a>
+    </div>
+<?php endif; ?>
+        <div class="container">
+
         <div class="pricing-card">
             <div class="badge">Basic</div>
             <h3>5 halaman</h3>
             <p>Free Domain<br>Free SSL<br>SEO basic<br>Free Email Bisnis<br>penyimpanan 500 MB</p>
-            <div class="price">IDR 88.000</div>
+            <div class="price">IDR 88.000/tahun</div>
             <button class="order-button" onclick="setPackageType('basic')">ORDER</button>
         </div>
 
@@ -125,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="badge premium-badge">Premium</div>
             <h3>15 halaman</h3>
             <p>Free Domain<br>Free SSL<br>SEO basic<br>Free Email Bisnis<br>penyimpanan 2 GB</p>
-            <div class="price">IDR 180.000</div>
+            <div class="price">IDR 180.000/tahun</div>
             <button class="order-button" onclick="setPackageType('premium')">ORDER</button>
         </div>
 
@@ -133,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="badge">Profesional</div>
             <h3>10 halaman</h3>
             <p>Free Domain<br>Free SSL<br>SEO basic<br>Free Email Bisnis<br>penyimpanan 1 GB</p>
-            <div class="price">IDR 128.000</div>
+            <div class="price">IDR 128.000/tahun</div>
             <button class="order-button" onclick="setPackageType('professional')">ORDER</button>
         </div>
     </div>
@@ -160,6 +177,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="text" id="phone" name="phone" placeholder="Nomor Telepon" required>
             
             <textarea id="additionalInfo" name="additionalInfo" placeholder="Tuliskan kebutuhan tambahan Anda di sini..."></textarea>
+
+            <!-- <label for="designReference">Unggah Referensi Desain Website</label>
+            <input type="file" id="designReference" name="designReference" accept=".jpg, .jpeg, .png, .pdf"> -->
+            
             
             <button type="submit" class="order-button">Kirim Order</button>
 
@@ -168,10 +189,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </div>
-
-
-
-
     <!-- Service Section -->
 <div id="service" class="service-section">
     <h2>Our Services</h2>
@@ -205,18 +222,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 
+<div id="product" class="product" >
+    <h2>Product</h2>
+    <div class="product-container">
+        <div class="product-card">
+            <img src="web7.jpg" alt="Web Development">
+        </div>
+        <div class="product-card">
+            <img src="web3.jpg" alt="Mobile Development">
+        </div>
+        <div class="product-card">
+            <img src="web5.jpg" alt="UI/UX Design">
+        </div>
+    </div>
+</div>
+
 <!-- Technology Section -->
 <div class="tech-section">
     <h2>Technology</h2>
     <div class="tech-container">
-        <img src="html.jpg" >
-        <img src="js.jpg" >
-        <img src="ps.jpg" >
-        <img src="css.jpg" >
-        <img src="react.jpg" >
-        <img src="nodejs.jpg" >
-        <img src="php.jpg" >
-  </div>
+        <img src="html.jpg" alt="HTML">
+        <img src="js.jpg" alt="JavaScript">
+        <img src="ps.jpg" alt="Photoshop">
+        <img src="css.jpg" alt="CSS">
+        <img src="react.jpg" alt="React">
+        <img src="nodejs.jpg" alt="Node.js">
+        <img src="php.jpg" alt="PHP">
+    </div>
+</div>
+
 
 </div>
 <footer>
@@ -233,7 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="footer-right">
         <p>Lebih Murah! Lebih Hemat!</p>
-        <span>Web Hosting Gratis Domain mulai dari <strong>IDR. 10.000/bln</strong></span>
+        <span>Web Hosting Gratis Domain yang <strong>Terpercaya</strong></span>
     </div>
     
 </div>
@@ -244,10 +278,6 @@ function openModal(formId) {
     document.getElementById(formId).style.display = "flex";
 }
 
-// Function to close modal
-function closeModal(formId) {
-    document.getElementById(formId).style.display = "none";
-}
 
 // Event listeners for login and signup buttons
 document.querySelector(".login-btn").addEventListener("click", function(event) {
@@ -259,23 +289,20 @@ document.querySelector(".signup-btn").addEventListener("click", function(event) 
     event.preventDefault();
     openModal("registerForm");
 });
-// Function to open modal
-function openModal(formId) {
-    document.getElementById(formId).style.display = "flex";
-}
-
-// Function to close modal
-function closeModal(formId) {
-    document.getElementById(formId).style.display = "none";
-}
-
-// Optional: Close modal when clicking outside the modal content
-window.onclick = function(event) {
-    var modal = document.getElementById('orderFormModal');
-    if (event.target === modal) {
-        closeModal('orderFormModal');
-    }
-}
+        function openModal(formId) {
+            document.getElementById(formId).style.display = "flex";
+        }
+        function closeModal(formId) {
+            document.getElementById(formId).style.display = "none";
+        }
+        function setPackageType(packageType) {
+            document.getElementById('package_type').value = packageType;
+            openModal('orderFormModal');
+        }
+        window.onclick = function(event) {
+            var modal = document.getElementById('orderFormModal');
+            if (event.target === modal) closeModal('orderFormModal');
+        }
 function setPackageType(packageType) {
     // Set the hidden input value for package type
     document.getElementById('package_type').value = packageType;
